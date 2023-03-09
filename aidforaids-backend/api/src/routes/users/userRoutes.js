@@ -2,4 +2,5 @@ import { Router } from "express";
 
 const userRoute = Router();
 
-module.exports = userRoute;
+export default userRoute;
+// module.exports = userRoute;
