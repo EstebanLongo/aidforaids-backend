@@ -1,0 +1,37 @@
+//Prisma schema file
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  address   String?
+  photoUrl  String?
+  cart      ShoppingCart?
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  isbn      String   @unique
+  title     String   
+  author    String
+  editorial String
+  stock     Int
+}
+
+model ShoppingCart {
+  id          Int         @id @default(autoincrement())
+  user        User        @relation(fields: [userId], references: [id])
+  productId   Int?   
+  amount      Int?        @default(1)
+  userId      Int         @unique   
+}
